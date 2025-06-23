@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/home.css">
+    <title>ResumeBuilder - Crie seu currículo perfeito</title>
+</head>
+<body>
+
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">ResumeBuilder</div>
+            <div class="nav-links">
+                <a href="#home">Início</a>
+                <a href="#templates">Templates</a>
+                <a href="#about">Sobre</a>
+                <a href="#contact">Contato</a>
+                <button class="login-btn" onclick="openModal()">Entrar</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>CRIE SEU CURRÍCULO PERFEITO</h1>
+            <p>Destaque-se no mercado de trabalho com templates profissionais e modernos</p>
+            <a href="#templates" class="cta-button">Começar Agora</a>
+        </div>
+    </section>
+
+
+
+    <!-- Templates Section -->
+      <div id="templates" class="carousel-container">
+        <div class="status-bar">
+            <div class="status-progress" id="statusProgress"></div>
+        </div>
+        
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-slide slide-1">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Moderno</h2>
+                        <p class="slide-description">Onde geometria encontra arte em uma exibição deslumbrante de luz e forma.</p>
+                        <button id="create-cv"  class="slide-button">Criar</button>
+                    </div>
+                    <div class="geometric-art">
+                        <img src="./public/images/Captura de Tela (247).png" 
+                             alt="Arte Digital Geométrica" 
+                             class="slide-image">
+                    </div>
+                </div>
+
+                <div class="carousel-slide slide-2">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Classico</h2>
+                        <p class="slide-description">Formas abstratas que dançam em harmonia perfeita, criando padrões hipnotizantes.</p>
+                        <button id="create-cv"  class="slide-button">Criar</button>
+                    </div>
+                    <div class="geometric-art">
+                        <img src="./public/images/Captura de Tela (246).png" 
+                             alt="Padrões Geométricos" 
+                             class="slide-image">
+                    </div>
+                </div>
+
+                <div class="carousel-slide slide-3">
+                    <div class="slide-content">
+                        <h2 class="slide-title">Colorido</h2>
+                        <p class="slide-description">Uma experiência visual única que combina tecnologia e criatividade artística.</p>
+                        <button id="create-cv" class="slide-button">Criar</button>
+                    </div>
+                    <div class="geometric-art">
+                        <img src="./public/images/Captura de Tela (242).png" 
+                             alt="Arte Abstrata Colorida" 
+                             class="slide-image">
+                    </div>
+                </div>
+            </div>
+
+            <button class="carousel-nav prev" id="prevBtn">‹</button>
+            <button class="carousel-nav next" id="nextBtn">›</button>
+
+            <div class="carousel-indicators">
+                <div class="indicator active" data-slide="0"></div>
+                <div class="indicator" data-slide="1"></div>
+                <div class="indicator" data-slide="2"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <form class="login-form">
+            <button type="button" class="close-btn" onclick="closeModal()">×</button>
+            <h2>Entrar</h2>
+            
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">Entrar</button>
+            
+            <div class="form-footer">
+                Não tem conta? <a href="#" onclick="switchToRegister()">Cadastre-se</a>
+            </div>
+        </form>
+    </div>
+
+
+
+
+    <script src="./src/view/home.view.js"></script>
+</body>
+</html>

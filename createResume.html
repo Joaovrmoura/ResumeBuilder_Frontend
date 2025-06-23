@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Currículo Moderno</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/resumeForm.css">
+</head>
+<body>
+
+
+  <div class="container-app">
+
+    <div class="container">
+      <!-- <header>
+      <h1><i class="fas fa-file-alt"></i> Gerador de Currículo</h1>
+      <p>Crie um currículo profissional e moderno para vagas de desenvolvimento web. Navegue pelas etapas e adicione informações conforme necessário.</p>
+    </header> -->
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-text" id="progressText">Etapa 1 de 6</div>
+
+      <form class="resume-form" id="resumeForm">
+        <!-- Etapa 1: Informações Pessoais -->
+        <div class="step-section active" id="step1" data-step="1">
+          <div class="form-section">
+            <div class="step-indicator">1</div>
+            <h2><i class="fas fa-user"></i> Informações Pessoais</h2>
+            <div class="two-columns">
+              <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-signature"></i>
+                  <input type="text" id="nome" name="nome" placeholder="Ex: João Silva">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="localizacao">Cidade / Estado</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <input type="text" id="localizacao" name="localizacao" placeholder="Ex: São Paulo, SP">
+                </div>
+              </div>
+            </div>
+
+            <div class="two-columns">
+              <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-phone"></i>
+                  <input type="text" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com">
+                </div>
+              </div>
+            </div>
+
+            <div class="two-columns">
+              <div class="form-group">
+                <label for="github">GitHub</label>
+                <div class="input-with-icon">
+                  <i class="fab fa-github"></i>
+                  <input type="url" id="github" name="github" placeholder="https://github.com/seuusuario">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="linkedin">LinkedIn</label>
+                <div class="input-with-icon">
+                  <i class="fab fa-linkedin"></i>
+                  <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/seuusuario">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" disabled>
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="nav-btn next" data-next="2">
+              Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Etapa 2: Objetivo -->
+        <div class="step-section" id="step2" data-step="2">
+          <div class="form-section">
+            <div class="step-indicator">2</div>
+            <h2><i class="fas fa-bullseye"></i> Objetivo Profissional</h2>
+            <div class="form-group">
+              <div class="input-with-icon">
+                <i class="fas fa-edit"></i>
+                <textarea id="objetivo" name="objetivo"
+                  placeholder="Descreva seu objetivo profissional (ex: Estágio em desenvolvimento backend com NestJS)"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="1">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="nav-btn next" data-next="3">
+              Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Etapa 3: Formação -->
+        <div class="step-section" id="step3" data-step="3">
+          <div class="form-section">
+            <div class="step-indicator">3</div>
+            <h2><i class="fas fa-graduation-cap"></i> Formação Acadêmica</h2>
+
+            <div id="educacao-container">
+              <div class="addable-section">
+                <button type="button" class="remove-item-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+
+                <div class="two-columns">
+                  <div class="form-group">
+                    <label>Curso</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-book"></i>
+                      <input type="text" name="curso[]" placeholder="Ex: Engenharia de Software">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Instituição</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-university"></i>
+                      <input type="text" name="instituicao[]" placeholder="Ex: Universidade Tecnológica">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="two-columns">
+                  <div class="form-group">
+                    <label>Local</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-location-dot"></i>
+                      <input type="text" name="local[]" placeholder="Ex: São Paulo, SP">
+                    </div>
+                  </div>
+                  <div class="two-columns">
+                    <div class="form-group">
+                      <label>Data de Início</label>
+                      <div class="input-with-icon">
+                        <i class="fas fa-calendar"></i>
+                        <input type="text" name="inicio[]" placeholder="MM/AAAA">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Previsão de Conclusão</label>
+                      <div class="input-with-icon">
+                        <i class="fas fa-calendar-check"></i>
+                        <input type="text" name="conclusao[]" placeholder="MM/AAAA">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="add-more-btn" id="add-educacao">
+              <i class="fas fa-plus"></i> Adicionar Formação
+            </button>
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="2">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="nav-btn next" data-next="4">
+              Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Etapa 4: Conhecimentos Técnicos -->
+        <div class="step-section" id="step4" data-step="4">
+          <div class="form-section">
+            <div class="step-indicator">4</div>
+            <h2><i class="fas fa-laptop-code"></i> Conhecimentos Técnicos</h2>
+
+            <div id="habilidades-container">
+              <div class="addable-section">
+                <button type="button" class="remove-item-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+
+                <div class="form-group">
+                  <label>Nome da Habilidade</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-code"></i>
+                    <input type="text" name="categoria_habilidade[]" placeholder="Ex: Backend">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Habilidades (separadas por vírgula)</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-list"></i>
+                    <input type="text" name="lista_habilidades[]" placeholder="Ex: Node.js, Express, NestJS">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="add-more-btn" id="add-habilidade">
+              <i class="fas fa-plus"></i> Adicionar Habilidade
+            </button>
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="3">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="nav-btn next" data-next="5">
+              Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+
+
+
+        <!-- Etapa 5: Experiências Profissionais -->
+        <div class="step-section" id="step5" data-step="5">
+          <div class="form-section">
+            <div class="step-indicator">5</div>
+            <h2><i class="fas fa-briefcase"></i> Experiências Profissionais</h2>
+
+            <div id="experiencias-container">
+              <div class="addable-section">
+                <button type="button" class="remove-item-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+
+                <div class="form-group">
+                  <label>Nome da Experiência</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-project-diagram"></i>
+                    <input type="text" name="experiencia_nome[]" placeholder="Ex: Sistema de Gerenciamento de Tarefas">
+                  </div>
+                </div>
+
+                <div class="two-columns">
+                  <div class="form-group">
+                    <label>Data de Início</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-calendar"></i>
+                      <input type="text" name="experiencia_inicio[]" placeholder="MM/AAAA (Ex: Jan/2023)">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Data de Término</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-calendar-check"></i>
+                      <input type="text" name="experiencia_fim[]" placeholder="MM/AAAA (Ex: Dez/2024) ou 'Atual'">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Link Aplicável?</label>
+                  <div class="input-with-icon">
+
+                    <input type="url" name="experiencia_github[]" placeholder="https://github.com/usuario/projeto">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Descrição Resumida</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-align-left"></i>
+                    <input type="text" name="experiencia_descricao[]" placeholder="Ex: API RESTful feita em NestJS...">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Detalhes (um por linha)</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-list-ul"></i>
+                    <textarea name="experiencia_detalhes[]" placeholder="Executava a a tarefa - Preenchia uma planilha de dados..."></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="add-more-btn" id="add-experiencia">
+              <i class="fas fa-plus"></i> Adicionar Experiência
+            </button>
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="4">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="nav-btn next" data-next="6">
+              Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+
+
+
+        <!-- Etapa 7: Cursos Extras e Idiomas -->
+        <div class="step-section" id="step6" data-step="6">
+          <div class="form-section">
+            <div class="step-indicator">6</div>
+
+            <!-- Seção de Cursos Extras -->
+            <h2><i class="fas fa-certificate"></i> Cursos Adicionais</h2>
+            <div id="cursos-extras-container">
+              <div class="addable-section">
+                <button type="button" class="remove-item-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+
+                <div class="two-columns">
+                  <div class="form-group">
+                    <label>Nome do Curso</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-certificate"></i>
+                      <input type="text" name="curso_extra_nome[]" placeholder="Ex: Curso de React Avançado">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Instituição</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-school"></i>
+                      <input type="text" name="curso_extra_instituicao[]" placeholder="Ex: Alura, Udemy">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="two-columns">
+                  <div class="form-group">
+                    <label>Carga Horária</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-clock"></i>
+                      <input type="text" name="curso_extra_horas[]" placeholder="Ex: 40 horas">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Ano de Conclusão</label>
+                    <div class="input-with-icon">
+                      <i class="fas fa-calendar"></i>
+                      <input type="text" name="curso_extra_ano[]" placeholder="Ex: 2023">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="add-more-btn" id="add-curso-extra">
+              <i class="fas fa-plus"></i> Adicionar Curso
+            </button>
+
+
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="5">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button type="button" class="nav-btn next" data-next="7">
+              Próximo <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Etapa 7: Cursos e Idiomas -->
+        <div class="step-section" id="step7" data-step="7">
+
+          <div class="form-section">
+            <h2><i class="fas fa-language"></i> Idiomas</h2>
+            <div class="two-columns">
+
+
+              <div class="form-group">
+                <label for="portugues">Português</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-flag"></i>
+                  <input type="text" id="portugues" name="portugues" placeholder="Ex: Nativo">
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="ingles">Inglês</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-flag-usa"></i>
+                  <input type="text" id="ingles" name="ingles" placeholder="Ex: Intermediário Técnico">
+                </div>
+              </div>
+
+            </div>
+
+
+            <button type="button" class="add-more-btn" id="add-curso">
+              <i class="fas fa-plus"></i> Adicionar Curso
+            </button>
+          </div>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="6">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+
+            <button type="submit" id="btnCreate" class="nav-btn submit-btn">
+              Gerar Currículo <i class="fas fa-download"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+    <button type="button" id="visualizar-json">Visualizar JSON no Console</button>
+
+
+    <!-- aqui fecha o container geral -->
+  </div>
+  <button class="preview-toggle">
+    <i class="fas fa-eye"></i>
+  </button>
+
+  <!-- <script type="module" src="/main.js"></script> -->
+  <script type="module" src="./src/utils/FormDataCollector.js"> </script>
+  <script src="./src/utils/formConfig.js"></script>
+</body>
+
+</html>
