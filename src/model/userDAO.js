@@ -2,7 +2,7 @@ export default class User {
     async findOne(user_id) {
         try {
 
-            const response = await fetch(`http://localhost:3060/api/users/${user_id}`, {
+            const response = await fetch(`https://sharehub-dev-v2.onrender.com/api/users/${user_id}`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export default class User {
 
     async findAll() {
         try {
-            const response = await fetch('http://localhost:3060/api/resumes', {
+            const response = await fetch('https://sharehub-dev-v2.onrender.com/api/resumes', {
                 method: "GET",
                 credentials: 'include', 
                 headers: {
