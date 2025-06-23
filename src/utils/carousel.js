@@ -78,10 +78,11 @@ class Carousel {
 
 
 function verificarAutenticacaoComModal() {
-    const token = sessionStorage.getItem('authToken');
-    const userId = sessionStorage.getItem('user_id');
-
-    if (!token || !userId) {
+    
+   const userId = sessionStorage.getItem('user_id');
+   const user_email = sessionStorage.getItem('user_email')
+   
+    if (!user_email || !userId) {
         const modal = document.getElementById('authRequiredModal');
         modal.style.display = 'flex';
 

@@ -1,5 +1,3 @@
-const TOKEN = sessionStorage.getItem('authToken')
-
 export default class User {
     async findOne(user_id) {
         try {
@@ -7,9 +5,9 @@ export default class User {
             const response = await fetch(`http://localhost:3060/api/users/${user_id}`, {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${TOKEN}`,
                     'Content-Type': 'application/json',
-                }
+                },
+                credentials: 'include'
             });
 
         const data = await response.json()
@@ -29,8 +27,8 @@ export default class User {
         try {
             const response = await fetch('http://localhost:3060/api/resumes', {
                 method: "GET",
+                credentials: 'include', 
                 headers: {
-                    Authorization: `Bearer ${TOKEN}`,
                     'Content-Type': 'application/json',
                 }
             });

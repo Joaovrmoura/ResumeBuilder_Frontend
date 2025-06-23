@@ -4,10 +4,11 @@ import ResumeController from "../controller/ResumeController.js";
 import generatePDF from './generatePDF.js';
 
 function verificarAutenticacao() {
-    const token = sessionStorage.getItem('authToken');
     const userId = sessionStorage.getItem('user_id');
-
-    if (!token || !userId) {
+    const user_email = sessionStorage.getItem('user_email');
+    console.log(userId, user_email); 
+    
+    if (!userId || !user_email) {
         window.location.href = 'home.html';
     }
 }

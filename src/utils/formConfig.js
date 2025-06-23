@@ -1,8 +1,8 @@
 function verificarAutenticacao() {
-  const token = sessionStorage.getItem('authToken');
   const userId = sessionStorage.getItem('user_id');
+  const user_email = sessionStorage.getItem('user_email')
 
-  if (!token || !userId) {
+  if (!userId || !user_email) {
     window.location.href = 'home.html';
   }
 }

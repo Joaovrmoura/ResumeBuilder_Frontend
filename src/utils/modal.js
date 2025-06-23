@@ -1,7 +1,6 @@
 // scripts/modalLogin.js
 import AuthController from '../controller/AuthController.js';
 
-
 class ModalLogin {
     constructor(modalId = 'loginModal') {
         this.modal = document.getElementById(modalId);
@@ -188,12 +187,13 @@ class ModalLogin {
 document.addEventListener('DOMContentLoaded', () => {
     new ModalLogin();
 
-    const token = sessionStorage.getItem('authToken');
-    const userName = sessionStorage.getItem('user_name');
+   const userId = sessionStorage.getItem('user_id');
+   const user_email = sessionStorage.getItem('user_email')
+
     const loginBtn = document.querySelector('.login-btn');
     const userSpan = document.querySelector('.user-name');
 
-    if (token && userName) {
+    if (userId && user_email) {
         if (loginBtn) loginBtn.style.display = 'none';
 
         if (userSpan) {
