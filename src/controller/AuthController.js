@@ -19,7 +19,7 @@ class AuthController {
                 sessionStorage.setItem('user_id', data.data._id);
                 return true;
             } else {
-                console.warn('Login falhou:', data.message);
+                console.log('Login falhou:', data.message);
             }
 
 
@@ -33,31 +33,32 @@ class AuthController {
         try {
             const response = await fetch('https://sharehub-dev-v2.onrender.com/auth/register', {
                 method: 'POST',
-                credentials: 'include', 
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
+            });
+
+            // Confirme se a resposta é JSON válida
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                throw new Error("Resposta da API não é JSON");
             }
-            )
+
             const data = await response.json();
-            console.log(data.success);
+            console.log('Resposta da API:', data);
 
             if (data.success === true) {
-                console.log('Resposta da API:', data);
-                const token = data.token; 
-
                 sessionStorage.setItem('user_email', data.data.email);
                 sessionStorage.setItem('user_id', data.data._id);
-
                 return true;
-
             } else {
-                console.warn('Cadastro falhou:', data.message);
+                console.log('Cadastro falhou:', data.message);
+                return false;
             }
 
-
         } catch (error) {
-            console.error("Erro ao buscar dados:", error);
-            throw error;
+            console.error("Erro no AuthController.register:", error);
+            throw error; // repassa para o `catch` de registerForm()
         }
     }
 
@@ -65,7 +66,6 @@ class AuthController {
     getToken() {
         return sessionStorage.getItem('authToken');
     }
-
 }
 
 

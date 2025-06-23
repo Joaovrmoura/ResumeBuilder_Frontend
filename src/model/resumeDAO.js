@@ -16,6 +16,8 @@ class ResumeService {
 
             if (responseData.success === true) {
                 return responseData.data;
+            }else{
+                console.log("ERROR MESSAGE: ", data.message);
             }
 
             throw new Error("Dados inválidos da API");
@@ -42,9 +44,11 @@ class ResumeService {
 
             if (data.success === true) {
                 return data.data;
+            }else{
+                console.log("ERROR MESSAGE: ", data.message);
             }
 
-            console.warn("Falha ao criar:", data.message || data);
+            console.log("Falha ao criar:", data.message || data);
             return [];
 
         } catch (error) {
@@ -74,9 +78,12 @@ class ResumeService {
             if (data.success === true) {
                 console.log("Criado com sucesso", data.data);
                 return data.data;
+            }else{
+                console.log("ERROR MESSAGE: ", data.message);
             }
 
-            console.warn("Falha ao criar:", data.message || data);
+            console.log("Falha ao criar:", data.message || data);
+
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
             throw error;

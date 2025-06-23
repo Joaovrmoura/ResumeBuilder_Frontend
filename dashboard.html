@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/dashboard.css">
     <title>Dashboard de Currículos</title>
 </head>
+
 <body>
+
+    <div id="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>Dashboard de Currículos</h1>
@@ -17,24 +24,25 @@
             <button class="nav-tab active" data-section="todos">Todos os Currículos</button>
             <button class="nav-tab" data-section="unico">Currículo Único</button>
             <button class="nav-tab" data-section="perfil"">Ver Perfil</button>
-            <button id="generate-pdf" style="display:none;">Download PDF</button>
+            <button id=" generate-pdf" style="display:none;">Download PDF</button>
         </div>
 
         <!-- Seção: Todos os Currículos -->
         <div id="todos" class="content-section active">
             <div class="card">
-                <input type="text" class="search-bar" placeholder="Buscar currículos..." oninput="filterCurriculos(this.value)">
-                
+                <input type="text" class="search-bar" placeholder="Buscar currículos..."
+                    oninput="filterCurriculos(this.value)">
+
                 <div class="stats-grid">
                     <div class="stat-card">
                         <div id="numberOfresumes" class="stat-number">247</div>
                         <div class="stat-label">Total de Currículos</div>
                     </div>
                 </div>
-                
+
 
                 <div class="curriculos-grid" id="curriculosGrid">
-                    <div class="curriculo-card" onclick="showSingleCurriculo('Maria Silva')">
+                    <!-- <div class="curriculo-card" onclick="showSingleCurriculo('Maria Silva')">
                         <div class="curriculo-header">
                             <div class="avatar">MS</div>
                             <div class="curriculo-info">
@@ -57,7 +65,7 @@
                             </div>
                         </div>
                         <button class="btn">Ver Detalhes</button>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -67,8 +75,8 @@
 
         <!-- Seção: Currículo Único -->
         <div id="unico" class="content-section">
-               <div id="resume"></div>
-                
+            <div id="resume"></div>
+
         </div>
 
         <!-- Seção: Ver Perfil -->
@@ -114,4 +122,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
+
 </html>

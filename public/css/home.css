@@ -706,6 +706,34 @@ body {
     transition: all 0.3s ease;
 }
 
+#modal-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.spinner-modal {
+    border: 6px solid #ccc;
+    border-top: 6px solid #272727;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spinModal 1s linear infinite;
+}
+
+@keyframes spinModal {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .indicator.active {
     background: linear-gradient(135deg, #667eea, #764ba2);
     transform: scale(1.2);

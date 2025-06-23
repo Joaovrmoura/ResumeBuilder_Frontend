@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/home.css">
     <title>ResumeBuilder - Crie seu currículo perfeito</title>
 </head>
+
 <body>
 
 
@@ -13,7 +15,7 @@
     <header class="header">
         <nav class="nav">
             <div class="logo">ResumeBuilder</div>
-           <!-- dentro do header -->
+            <!-- dentro do header -->
             <div class="nav-links">
                 <a href="#home">Início</a>
                 <a href="#templates">Templates</a>
@@ -37,49 +39,50 @@
 
 
     <!-- Templates Section -->
-      <div id="templates" class="carousel-container">
+    <div id="templates" class="carousel-container">
         <div class="status-bar">
             <div class="status-progress" id="statusProgress"></div>
         </div>
-        
+
         <div class="carousel-wrapper">
             <div class="carousel-track" id="carouselTrack">
                 <div class="carousel-slide slide-1">
                     <div class="slide-content">
                         <h2 class="slide-title">Moderno</h2>
-                        <p class="slide-description">Onde geometria encontra arte em uma exibição deslumbrante de luz e forma.</p>
-                        <a href="createResume.html?template=moderno" id="create-cv"  class="slide-button">Criar</a>
+                        <p class="slide-description">Onde geometria encontra arte em uma exibição deslumbrante de luz e
+                            forma.</p>
+                        <a href="createResume.html?template=moderno" id="create-cv" class="slide-button">Criar</a>
                     </div>
                     <div class="geometric-art">
-                        <img src="./public/images/Captura de Tela (247).png" 
-                             alt="Arte Digital Geométrica" 
-                             class="slide-image">
+                        <img src="/images/Captura de Tela (247).png" alt="Arte Digital Geométrica"
+                            class="slide-image">
                     </div>
                 </div>
 
                 <div class="carousel-slide slide-2">
                     <div class="slide-content">
                         <h2 class="slide-title">Classico</h2>
-                        <p class="slide-description">Formas abstratas que dançam em harmonia perfeita, criando padrões hipnotizantes.</p>
-                        <a href="createResume.html?template=classico" id="create-cv" data-="classico"  class="slide-button">Criar</a>
+                        <p class="slide-description">Formas abstratas que dançam em harmonia perfeita, criando padrões
+                            hipnotizantes.</p>
+                        <a href="createResume.html?template=classico" id="create-cv" data-="classico"
+                            class="slide-button">Criar</a>
                     </div>
                     <div class="geometric-art">
-                        <img src="./public/images/Captura de Tela (246).png" 
-                             alt="Padrões Geométricos" 
-                             class="slide-image">
+                        <img src="/images/Captura de Tela (246).png" alt="Padrões Geométricos"
+                            class="slide-image">
                     </div>
                 </div>
 
                 <div class="carousel-slide slide-3">
                     <div class="slide-content">
                         <h2 class="slide-title">Colorido</h2>
-                        <p class="slide-description">Uma experiência visual única que combina tecnologia e criatividade artística.</p>
+                        <p class="slide-description">Uma experiência visual única que combina tecnologia e criatividade
+                            artística.</p>
                         <a href="createResume.html?template=colorido" id="create-cv" class="slide-button">Criar</a>
                     </div>
                     <div class="geometric-art">
-                        <img src="./public/images/Captura de Tela (242).png" 
-                             alt="Arte Abstrata Colorida" 
-                             class="slide-image">
+                        <img src="/images/Captura de Tela (242).png" alt="Arte Abstrata Colorida"
+                            class="slide-image">
                     </div>
                 </div>
             </div>
@@ -101,34 +104,38 @@
         <form class="login-form">
             <button type="button" class="close-btn" onclick="closeModal()">×</button>
             <h2>Entrar</h2>
-            
+
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="password">Senha</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            
+
             <button type="submit" class="submit-btn">Entrar</button>
-            
+
             <div class="form-footer">
                 Não tem conta? <a href="#" onclick="switchToRegister()">Cadastre-se</a>
+            </div>
+            <div id="modal-loader" style="display: none;">
+                <div class="spinner-modal"></div>
             </div>
         </form>
     </div>
 
     <div id="authRequiredModal" class="modal-overlay" style="display: none;">
-    <div class="modal-content login-form">
-        <h2>faça login para continuar</h2>
-        <button id="goToLogin" class="submit-btn">Fazer Login</button>
-    </div>
+        <div class="modal-content login-form">
+            <h2>faça login para continuar</h2>
+            <button id="goToLogin" class="submit-btn">Fazer Login</button>
+        </div>
     </div>
 
 
     <script type="module" src="./src/utils/carousel.js"></script>
     <script type="module" src="./src/utils/modal.js"></script>
 </body>
+
 </html>

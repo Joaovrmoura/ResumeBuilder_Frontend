@@ -135,74 +135,84 @@ body {
     align-items: center;
     margin-bottom: 15px;
 }
+
 /* Container da seção único - ocupa toda a tela e centraliza o conteúdo */
 #unico {
-  display: none;
+    display: none;
 }
 
 .visualizacao-curriculo {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #eee;
-  align-items: center;
-  margin-top: 20px;
-  height: 100vh;
-  padding: 20px;
-  border-radius: 16px;
-  box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #eee;
+    align-items: center;
+    margin-top: 20px;
+    height: 100vh;
+    padding: 20px;
+    border-radius: 16px;
+    box-sizing: border-box;
 }
 
 /* Container do currículo */
 #resume {
-  width: 794px;
-  height: 1123px;
-  background-color: white;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  overflow: auto;
-  box-sizing: border-box;
-  align-items: center;
+    width: 794px;
+    height: 1123px;
+    background-color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    overflow: auto;
+    box-sizing: border-box;
+    align-items: center;
 
 }
+
 /* Scrollbar personalizada para #resume */
 
 /* Chrome, Edge, Safari */
 #resume::-webkit-scrollbar {
-  width: 12px;               /* largura da barra vertical */
-  height: 12px;              /* altura da barra horizontal (se houver) */
+    width: 12px;
+    /* largura da barra vertical */
+    height: 12px;
+    /* altura da barra horizontal (se houver) */
 }
 
 #resume::-webkit-scrollbar-track {
-  background: #f0f0f0;       /* cor do fundo da trilha */
-  border-radius: 8px;
+    background: #f0f0f0;
+    /* cor do fundo da trilha */
+    border-radius: 8px;
 }
 
 #resume::-webkit-scrollbar-thumb {
-  background-color:  #764ba2; /* cor do "polegar" da barra */
-  border-radius: 8px;
-  border: 3px solid #f0f0f0; /* espaço entre o polegar e a trilha */
+    background-color: #764ba2;
+    /* cor do "polegar" da barra */
+    border-radius: 8px;
+    border: 3px solid #f0f0f0;
+    /* espaço entre o polegar e a trilha */
 }
 
 #resume::-webkit-scrollbar-thumb:hover {
-  background-color: #0056b3; /* cor ao passar o mouse */
+    background-color: #0056b3;
+    /* cor ao passar o mouse */
 }
 
 /* Firefox */
 #resume {
-  scrollbar-width: thin;          /* barra mais fina */
-  scrollbar-color:  #764ba2 #f0f0f0; /* polegar e trilha */
+    scrollbar-width: thin;
+    /* barra mais fina */
+    scrollbar-color: #764ba2 #f0f0f0;
+    /* polegar e trilha */
 }
 
 @media (max-width: 850px) {
-  #resume {
-    width: 90vw;
-    height: calc(90vw * 1.414);
-  }
+    #resume {
+        width: 90vw;
+        height: calc(90vw * 1.414);
+    }
 }
 
 /* Estilo do botão download */
 #generate-pdf {
-   background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     padding: 15px 30px;
     border-radius: 50px;
@@ -215,7 +225,7 @@ body {
 }
 
 #generate-pdf:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .avatar {
@@ -391,6 +401,37 @@ body {
     outline: none;
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
 }
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner {
+    border: 6px solid #ccc;
+    border-top: 6px solid #272727;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
 
 @media (max-width: 768px) {
     .container {

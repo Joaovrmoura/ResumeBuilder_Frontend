@@ -24,6 +24,9 @@ class ModalLogin {
     }
 
     async loginForm() {
+        const loader = document.getElementById('modal-loader');
+        loader.style.display = 'flex';
+
         try {
             const email = this.form.querySelector('#email').value;
             const password = this.form.querySelector('#password').value;
@@ -43,11 +46,10 @@ class ModalLogin {
                 const loginBtn = document.querySelector('.login-btn');
                 if (loginBtn) loginBtn.style.display = 'none';
 
-                // Exibe nome do usuário
-                const userName = sessionStorage.getItem('user_name');
+                // Define userSpan corretamente
                 const userSpan = document.querySelector('.user-name');
 
-                if (userSpan && userName) {
+                if (userSpan) {
                     userSpan.textContent = `Logado`;
                     userSpan.style.display = 'inline-block';
                     userSpan.style.padding = '0 10px';
@@ -60,17 +62,21 @@ class ModalLogin {
                     userSpan.style.fontWeight = "600";
                     userSpan.style.transition = "all 0.3s ease";
                     userSpan.style.textDecoration = "none";
-
                 }
             }
 
         } catch (error) {
             console.error(error);
+        } finally {
+            loader.style.display = 'none';
         }
     }
 
 
-      async registerForm() {
+    async registerForm() {
+        const loader = document.getElementById('modal-loader');
+        loader.style.display = 'flex';
+
         try {
             const email = this.form.querySelector('#email').value;
             const password = this.form.querySelector('#password').value;
@@ -81,23 +87,42 @@ class ModalLogin {
                 return;
             }
 
-            const userData = {
-                email: email,
-                password: password
-            };
-
+            const userData = { email, password };
             const auth = new AuthController();
             const register = await auth.register(userData);
             console.log('cadastrou?', register);
-            
+
             if (register) {
-                alert('Cadastro realizado com sucesso! Faça login para continuar.');
-                this.switchToLogin();
+                alert('Cadastrado com sucesso!');
+                // Fecha modal
+                this.close();
+                // Esconde botão de login
+                const loginBtn = document.querySelector('.login-btn');
+                if (loginBtn) loginBtn.style.display = 'none';
+
+                // Define userSpan corretamente
+                const userSpan = document.querySelector('.user-name');
+
+                if (userSpan) {
+                    userSpan.textContent = `Logado`;
+                    userSpan.style.display = 'inline-block';
+                    userSpan.style.padding = '0 10px';
+                    userSpan.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
+                    userSpan.style.color = "white";
+                    userSpan.style.padding = "0.7rem 1.5rem";
+                    userSpan.style.borderRadius = "50px";
+                    userSpan.style.border = "none";
+                    userSpan.style.cursor = "pointer";
+                    userSpan.style.fontWeight = "600";
+                    userSpan.style.transition = "all 0.3s ease";
+                    userSpan.style.textDecoration = "none";
+                }
             }
 
         } catch (error) {
             console.error(error);
-            alert('Erro ao cadastrar usuário. Tente novamente.');
+        } finally {
+            loader.style.display = 'none';
         }
     }
 
@@ -187,8 +212,8 @@ class ModalLogin {
 document.addEventListener('DOMContentLoaded', () => {
     new ModalLogin();
 
-   const userId = sessionStorage.getItem('user_id');
-   const user_email = sessionStorage.getItem('user_email')
+    const userId = sessionStorage.getItem('user_id');
+    const user_email = sessionStorage.getItem('user_email')
 
     const loginBtn = document.querySelector('.login-btn');
     const userSpan = document.querySelector('.user-name');

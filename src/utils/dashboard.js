@@ -162,6 +162,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const ui = new CurriculoUI();
     const numberOfresumes = document.getElementById('numberOfresumes');
     const user_id = sessionStorage.getItem('user_id');
+    const loader = document.getElementById('loader');
+    loader.style.display = 'flex'; // Mostra o loader
+
 
     try {
         const user = new User();
@@ -174,6 +177,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (err) {
         console.error("Erro ao carregar currículos:", err);
+    } finally {
+    loader.style.display = 'none'; // Esconde o loader
     }
 
     const searchInput = document.getElementById('searchInput');

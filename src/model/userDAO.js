@@ -10,12 +10,14 @@ export default class User {
                 credentials: 'include'
             });
 
-        const data = await response.json()
-            
-        if(data.success === true) {
-            return data.data;
-        }
-        throw new Error("Dados inválidos da API");
+            const data = await response.json()
+
+            if (data.success === true) {
+                return data.data;
+            } else {
+                console.log("ERROR MESSAGE: ", data.message);
+            }
+            throw new Error("Dados inválidos da API");
 
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
@@ -27,7 +29,7 @@ export default class User {
         try {
             const response = await fetch('https://sharehub-dev-v2.onrender.com/api/resumes', {
                 method: "GET",
-                credentials: 'include', 
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -41,6 +43,8 @@ export default class User {
 
             if (responseData.success === true) {
                 return responseData.data;
+            }else{
+                console.log("ERROR MESSAGE: ", data.message);
             }
 
             throw new Error("Dados inválidos da API");
