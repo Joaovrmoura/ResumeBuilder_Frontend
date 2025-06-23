@@ -30,13 +30,21 @@ export default class Templates {
 
     return `
           <style>
-            body{
+           * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+
+             .resume-template {
+              width:794px; 
+              height: 1123px;
               font-size: 90%;
               font-family: 'Arial';
             }
-              h2{
-                font-size: 15px;
-              }
+          h2{
+            font-size: 15px;
+          }
           </style>  
             <div class="resume-template" style="width: 100%; margin: 0 auto; font-size: 105%; color: #333333;">
         <!-- Cabeçalho -->
@@ -150,10 +158,18 @@ export default class Templates {
 
     return ` 
       <style>
-      body{
-        font-family: 'Arial';
-        font-size: 90%;
-      }
+         * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+
+          .resume-template {
+              width:794px; 
+              height: 1123px;
+              font-size: 90%;
+              font-family: 'Arial';
+          }
         h2{
           font-size: 20px;
         }
@@ -281,11 +297,19 @@ export default class Templates {
 
     return `
         <style>
-        body{
-            font-size: 80%;
-            font-family:'Arial'
+           * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
           }
-    </style>  
+
+          .resume-template {
+              width:794px; 
+              height: 1123px;
+              font-size: 80%;
+              font-family: 'Arial';
+          }
+        </style>  
           <div class="resume-template" style="max-width: 800px;  
                 margin: 0 auto; margin-top: 15px; padding: 0px 30px; color: #2c3e50; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
         <!-- Cabeçalho -->

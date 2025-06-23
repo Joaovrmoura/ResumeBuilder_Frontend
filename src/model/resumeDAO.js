@@ -1,68 +1,89 @@
-const TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODUzNzY0NmVjNGEzOGJkYzFiNDVmOWUiLCJlbWFpbCI6InVzZXJ0ZXN0ZTZAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzUwNjQ3NDY3LCJleHAiOjE3NTA2NTA0Njd9.a66w912G-auj0MRl4C_KPNh1Oey_upwKDa1VZn3YWYU";
+const token_session = sessionStorage.getItem("authToken")
 
 class ResumeService {
 
-    async findOne() {
+    async findOne(id) {
         try {
-            const response = await fetch("http://localhost:3060/api/resumes/6854534fe76ba884882abad9", {
+            const response = await fetch(`http://localhost:3060/api/resumes/${id}`, {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${TOKEN}`,
+                    Authorization: `Bearer ${token_session}`,
                     'Content-Type': 'application/json',
                 }
             });
-        
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
+
             const responseData = await response.json();
-            
+
             if (responseData.success === true) {
-                console.log(responseData.data);
-                
                 return responseData.data;
             }
             throw new Error("Dados inválidos da API");
-            
+
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
             throw error;
         }
     }
 
-    async findAll(){
-         try {
-            const response = await fetch('http://localhost:3060/api/resumes', {
+    async findAll() {
+        try {
+            const token_session = sessionStorage.getItem('authToken');
+            const user_id = sessionStorage.getItem('user_id');
+            
+            const response = await fetch(`http://localhost:3060/api/resumes`, {
                 method: "GET",
                 headers: {
-                    Authorization: `Bearer ${TOKEN}`,
-                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token_session}`,
+                    'Content-Type': 'application/json'
                 }
             });
             
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+            const data = await response.json(); 
+        
             
-            const responseData = await response.json();
-            
-            if (responseData.success === true) {
-                return responseData.data;
+            if (data.success === true) {
+                return data.data;
             }
 
-            throw new Error("Dados inválidos da API");
-            
+            console.warn("Falha ao criar:", data.message || data);
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
             throw error;
         }
     }
 
-    async create() {
-        
-    }
+    async create(bodyData) {
+        try {
+            const token_session = sessionStorage.getItem('authToken');
+            console.log("DADOS DO BODY", bodyData);
 
+            const response = await fetch("http://localhost:3060/api/resumes/", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token_session}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyData) 
+            });
+
+            const data = await response.json();
+            console.log(data);
+            
+            if (data.success === true) {
+                console.log("Criado com sucesso", data.data);
+                return data.data;
+            }
+
+            console.warn("Falha ao criar:", data.message || data);
+        } catch (error) {
+            console.error("Erro ao buscar dados:", error);
+            throw error;
+        }
+    }
 }
 
 export default new ResumeService();

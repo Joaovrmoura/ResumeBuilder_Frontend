@@ -8,9 +8,9 @@ class ResumeController {
         this.#templatesHTML = new Templates();
     }
 
-    async getOne() {
+    async getOne(id) {
         try {
-            const apiData = await ResumeService.findOne();
+            const apiData = await ResumeService.findOne(id);
             const transformedData = this.#templatesHTML.transformResumeData(apiData);
             const templateName = apiData.template_selected || 'classico';
 

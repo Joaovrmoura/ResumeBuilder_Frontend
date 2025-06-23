@@ -1,8 +1,10 @@
-class User {
+const TOKEN = sessionStorage.getItem('authToken')
 
-    async findOne() {
+export default class User {
+    async findOne(user_id) {
         try {
-            const response = await fetch("http://localhost:3060/api/resumes/6854534fe76ba884882abad9", {
+
+            const response = await fetch(`http://localhost:3060/api/users/${user_id}`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${TOKEN}`,
@@ -10,16 +12,10 @@ class User {
                 }
             });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const responseData = await response.json();
-
-        if (responseData.success === true) {
-            console.log(responseData.data);
-
-            return responseData.data;
+        const data = await response.json()
+            
+        if(data.success === true) {
+            return data.data;
         }
         throw new Error("Dados inválidos da API");
 
@@ -58,3 +54,4 @@ class User {
     }
 
 }
+

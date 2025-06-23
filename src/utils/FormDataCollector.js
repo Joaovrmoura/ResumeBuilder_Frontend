@@ -1,3 +1,5 @@
+import resumeDAO from "../model/resumeDAO.js";
+
 export default class FormDataCollector {
   
   static getValue(id) {
@@ -18,6 +20,9 @@ export default class FormDataCollector {
 
     // Objetivo
     const objective = this.getValue('objetivo');
+    const urlParams = new URLSearchParams(window.location.search);
+    const template = urlParams.get('template');
+    const user_id = sessionStorage.getItem('user_id');
 
     // Formação acadêmica
     const education = [];
@@ -90,8 +95,8 @@ export default class FormDataCollector {
 
     // Objeto final
     return {
-      user_id: "68537646ec4a38bdc1b45f9e",
-      template_selected: "moderno",
+      user_id: user_id,
+      template_selected: template,
       personal_data,
       objective,
       education,
@@ -104,13 +109,24 @@ export default class FormDataCollector {
 }
 
 
+// Botão de salvar currículo
+document.getElementById('btnCreate').addEventListener('click', async () => {
+    try {
+        const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui
+        await resumeDAO.create(jsonData);
+        alert('Currículo salvo com sucesso!');
+    } catch (error) {
+        console.error('Erro ao salvar currículo:', error);
+        alert('Erro ao salvar currículo.');
+    }
+});
 
-// Configurar o evento de clique corretamente
-document.getElementById('visualizar-json').addEventListener('click', function() {
-    const jsonData = FormDataCollector.collectFormData();
- 
-    console.log('Dados do Formulário:', jsonData);
-    // Mostrar os dados em um alerta formatado (opcional)
-    alert('Dados do formulário (verifique o console para detalhes):\n' + 
-    JSON.stringify(jsonData, null, 2));
+// Botão de visualizar JSON
+document.getElementById('visualizar-json').addEventListener('click', function () {
+    const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui também
+    alert(
+        'Dados do formulário (verifique o console para detalhes):\n' +
+        JSON.stringify(jsonData, null, 2)
+    );
+    console.log(jsonData);
 });
