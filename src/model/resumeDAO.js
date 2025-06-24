@@ -36,10 +36,6 @@ class ResumeService {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
             const data = await response.json();
 
             if (data.success === true) {
@@ -47,8 +43,7 @@ class ResumeService {
             }else{
                 console.log("ERROR MESSAGE: ", data.message);
             }
-
-            console.log("Falha ao criar:", data.message || data);
+            
             return [];
 
         } catch (error) {
