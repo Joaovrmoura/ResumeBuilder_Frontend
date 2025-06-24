@@ -43,7 +43,7 @@ class ResumeService {
             }else{
                 console.log("ERROR MESSAGE: ", data.message);
             }
-            
+
             return [];
 
         } catch (error) {
@@ -63,12 +63,7 @@ class ResumeService {
                 body: JSON.stringify(bodyData)
             });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
             const data = await response.json();
-            console.log(data);
 
             if (data.success === true) {
                 console.log("Criado com sucesso", data.data);
@@ -76,8 +71,6 @@ class ResumeService {
             }else{
                 console.log("ERROR MESSAGE: ", data.message);
             }
-
-            console.log("Falha ao criar:", data.message || data);
 
         } catch (error) {
             console.error("Erro ao buscar dados:", error);
