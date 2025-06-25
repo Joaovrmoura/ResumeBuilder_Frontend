@@ -1,51 +1,127 @@
-# Formatador de Currículo ATS
+📄 Documentação da API – Fast CV
+API RESTful para gerenciamento de currículos e usuários.
+Desenvolvida com Node.js, Express, MongoDB (via Mongoose), autenticação JWT com cookies HttpOnly, validação com express-validator, segurança com helmet e controle de acesso via middleware.
 
-Este é um aplicativo web que permite criar currículos otimizados para sistemas ATS (Applicant Tracking System), que são utilizados por empresas para filtrar candidatos em processos seletivos.
+🌐 URL Base da Produção
+arduino
+Copiar
+Editar
+https://fast-cv-phi.vercel.app
 
-## Características
+🔒 Autenticação
+Utiliza JWT com cookie HttpOnly
+O token tem expiração definida em .env com TOKEN_EXPIRATION=50m
+Apenas usuários autenticados podem acessar rotas protegidas (/api/*)
+Middleware de validação verifica a presença e validade do token
 
-- Formulário completo para inserção de dados pessoais e profissionais
-- Geração de currículo em formato ATS-friendly
-- Exportação para PDF com um clique
-- Design responsivo (funciona em dispositivos móveis e desktop)
-- Não requer conexão com internet após o carregamento inicial
+🛡️ Segurança
+helmet: adiciona headers de segurança HTTP
+cors: permite apenas https://fast-cv-phi.vercel.app
+rate-limit: proteção contra requisições excessivas
 
-## Como usar
+🔐 Detalhes Técnicos do Cookie (Ambientes)
+A autenticação via JWT utiliza um cookie HttpOnly com as seguintes configurações:
 
-1. Abra o arquivo `index.html` em qualquer navegador moderno
-2. Preencha o formulário com suas informações
-3. Clique em "Gerar Currículo" para visualizar o resultado
-4. Clique em "Baixar PDF" para salvar o currículo em formato PDF
+js
+Copiar
+Editar
+res.cookie('token', token, {
+  path: '/',
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+  maxAge: 24 * 60 * 60 * 1000
+});
 
-## Requisitos para currículos ATS
 
-- Formato simples e limpo
-- Fontes padrão (como Arial, Calibri ou Times New Roman)
-- Estrutura clara com títulos e subtítulos bem definidos
-- Palavras-chave relevantes para a vaga
-- Verbos de ação para descrever experiências
-- Evitar tabelas, imagens, gráficos ou elementos visuais complexos
-- Formato de arquivo compatível (PDF)
 
-## Arquivos do projeto
+📁 Estrutura do Projeto
+bash
+Copiar
+Editar
+📦 src
+ ┣ 📂config       # configurações como conexão, CORS e rateLimit
+ ┣ 📂controllers  # lógica de negócios (CRUD usuários e currículos)
+ ┣ 📂models       # schemas do Mongoose (User, Resume)
+ ┣ 📂routes       # rotas Express (auth, resume, user)
+ ┣ 📂validators   # validadores express-validator para cada entidade
+ ┣ 📂middlewares  # auth middleware, not found route handler
+📦 Endpoints
 
-- `index.html`: Estrutura da página e formulário
-- `style.css`: Estilos e layout da aplicação
-- `script.js`: Funcionalidades de coleta de dados e geração de PDF
+🔐 Autenticação (/auth)
+POST /auth/register
+Cria um novo usuário.
 
-## Bibliotecas utilizadas
+Body:
 
-- [html2pdf.js](https://github.com/eKoopmans/html2pdf.js): Para conversão do HTML para PDF
+json
+Copiar
+Editar
+{
+  "email": "userTeste6@gmail.com",
+  "password": "Joao123"
+}
+POST /auth/login
+Autentica o usuário e armazena o token JWT em um cookie HttpOnly.
 
-## Personalização
+Body:
 
-Você pode personalizar o estilo do currículo editando o arquivo `style.css`. As classes relacionadas ao modelo de currículo começam com `resume-`.
+json
+Copiar
+Editar
+{
+  "email": "userteste6@gmail.com",
+  "password": "Joao123"
+}
+👤 Usuários (/api/users)
+Requer autenticação via token (cookie HttpOnly).
 
-## Licença
+GET /api/users
+Retorna todos os usuários cadastrados.
 
-Este projeto é livre para uso pessoal e comercial.
+DELETE /api/users/:id
+Remove o usuário com base no ID informado.
 
----
+📄 Currículos (/api/resumes)
+Requer autenticação via token (cookie HttpOnly).
 
-Desenvolvido por [Seu Nome]
+GET /api/resumes
+Retorna todos os currículos.
 
+GET /api/resumes/:id
+Retorna um currículo específico.
+
+DELETE /api/resumes/:id
+Deleta um currículo específico.
+
+📘 Headers Necessários
+http
+Copiar
+Editar
+Content-Type: application/json
+credentials: 'include'  // para envio do cookie HttpOnly
+⚙️ Variáveis de Ambiente (.env)
+env
+Copiar
+Editar
+CONNECTSTRING=mongodb+srv://...
+PORT=3060
+ACESS_TOKEN_SECRET=...
+TOKEN_EXPIRATION=50m
+OPENROUTER_API_KEY=...
+NODE_ENV=development
+🔐 Middleware
+auth.middleware.js: protege rotas com JWT
+
+notFoundRoute.js: captura rotas inexistentes
+
+📚 Exemplo de Requisição com Fetch
+javascript
+Copiar
+Editar
+fetch('/api/resumes', {
+  method: 'GET',
+  credentials: 'include'
+})
+.then(res => res.json())
+.then(data => console.log(data));
