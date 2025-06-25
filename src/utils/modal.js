@@ -25,7 +25,8 @@ class ModalLogin {
     async loginForm() {
         const loader = document.getElementById('modal-loader');
         loader.style.display = 'flex';
-
+        loader.textContent = 'Servidor Render iniciando...'
+        
         try {
             const email = this.form.querySelector('#email').value;
             const password = this.form.querySelector('#password').value;
