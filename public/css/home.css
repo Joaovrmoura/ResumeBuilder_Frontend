@@ -776,6 +776,13 @@ body {
     animation: spinModal 1s linear infinite;
 }
 
+@keyframes spinModal {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
 #modal-loader p {
     margin-top: 15px; /* Espaçamento abaixo do spinner */
     font-size: 16px;
