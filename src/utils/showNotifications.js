@@ -14,11 +14,11 @@ export function showNotification(message, type = 'error') {
     document.body.appendChild(notification);
 
     // Mostra a notificação
-    setTimeout(() => notification.classList.add('show'), 100);
+    setTimeout(() => notification.classList.add('show'), 50);
 
     // Esconde depois de 4 segundos
     setTimeout(() => {
         notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 300);
+        setTimeout(() => notification.remove(), 100);
     }, 10000);
 }
