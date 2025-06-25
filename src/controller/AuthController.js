@@ -1,3 +1,5 @@
+import { handleApiError } from '../utils/ErrorHandler.js';
+
 class AuthController {
 
     async login(formData) {
@@ -10,7 +12,7 @@ class AuthController {
             }
             )
             const data = await response.json();
-            console.log('Resposta da API:', data);
+            handleApiError(data)
 
             if (data.success === true) {
                 const token = data.token; 
@@ -45,7 +47,7 @@ class AuthController {
             }
 
             const data = await response.json();
-            console.log('Resposta da API:', data);
+            handleApiError(data)
 
             if (data.success === true) {
                 sessionStorage.setItem('user_email', data.data.email);

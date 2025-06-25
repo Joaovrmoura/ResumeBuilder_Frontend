@@ -121,15 +121,13 @@ document.getElementById('btnCreate').addEventListener('click', async () => {
   try {
     const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui
     const create = await resumeDAO.create(jsonData);
+
     if (create) {
       window.location.href = 'dashboard.html'
-    } else {
-      alert('Algo deu errado ao adicionar currículo!')
     }
 
   } catch (error) {
     console.error('Erro ao salvar currículo:', error);
-    alert('Erro ao salvar currículo.');
   }
 });
 

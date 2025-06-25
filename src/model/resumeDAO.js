@@ -1,3 +1,5 @@
+import { handleApiError } from "../utils/ErrorHandler.js";
+
 class ResumeService {
 
     async findOne(id) {
@@ -13,6 +15,7 @@ class ResumeService {
             }
 
             const responseData = await response.json();
+            handleApiError(data)
 
             if (responseData.success === true) {
                 return responseData.data;
@@ -37,7 +40,8 @@ class ResumeService {
             });
 
             const data = await response.json();
-
+            handleApiError(data);
+            
             if (data.success === true) {
                 return data.data;
             }else{
@@ -64,7 +68,8 @@ class ResumeService {
             });
 
             const data = await response.json();
-
+            handleApiError(data);
+            
             if (data.success === true) {
                 console.log("Criado com sucesso", data.data);
                 return true

@@ -1,3 +1,5 @@
+import { handleApiError } from "../utils/ErrorHandler.js";
+
 export default class User {
     async findOne(user_id) {
         try {
