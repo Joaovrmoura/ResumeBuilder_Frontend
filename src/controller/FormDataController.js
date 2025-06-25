@@ -1,7 +1,7 @@
 import resumeDAO from "../model/resumeDAO.js";
 
+
 export default class FormDataCollector {
-  
   static getValue(id) {
     const element = document.getElementById(id);
     return element ? element.value : null;
@@ -86,11 +86,11 @@ export default class FormDataCollector {
       });
     });
 
-    const languagesContainer = [];
+    const languages = [];
     document.querySelectorAll('#languages-container .addable-section').forEach(section => {
-      languagesContainer.push({
-        duration: section.querySelector('input[name="languages_name[]"]')?.value || '',
-        duration: section.querySelector('input[name="languages_level[]"]')?.value || ''
+      languages.push({
+        name: section.querySelector('input[name="languages_name[]"]')?.value || '',
+        level: section.querySelector('input[name="languages_level[]"]')?.value || ''
       });
     });
 
@@ -110,7 +110,7 @@ export default class FormDataCollector {
       technical_skills,
       professional_experience,
       additional_courses,
-      languagesContainer
+      languages
     };
   }
 }
@@ -118,23 +118,18 @@ export default class FormDataCollector {
 
 // Botão de salvar currículo
 document.getElementById('btnCreate').addEventListener('click', async () => {
-    try {
-        const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui
-        await resumeDAO.create(jsonData);
-        
-        alert('Currículo salvo com sucesso!');
-    } catch (error) {
-        console.error('Erro ao salvar currículo:', error);
-        alert('Erro ao salvar currículo.');
+  try {
+    const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui
+    const create = await resumeDAO.create(jsonData);
+    if (create) {
+      window.location.href = 'dashboard.html'
+    } else {
+      alert('Algo deu errado ao adicionar currículo!')
     }
+
+  } catch (error) {
+    console.error('Erro ao salvar currículo:', error);
+    alert('Erro ao salvar currículo.');
+  }
 });
 
-// // Botão de visualizar JSON
-// document.getElementById('visualizar-json').addEventListener('click', function () {
-//     const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui também
-//     alert(
-//         'Dados do formulário (verifique o console para detalhes):\n' +
-//         JSON.stringify(jsonData, null, 2)
-//     );
-//     console.log(jsonData);
-// });

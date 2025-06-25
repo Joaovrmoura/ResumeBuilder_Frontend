@@ -15,22 +15,7 @@ body {
     display: flex;
     gap: 15px;
 }
-.button_logout {
-    display: none;
-    background: linear-gradient(135deg, #ea6666 0%, #a24e4b 100%);
-    color: white !important;
-    padding: 0.7rem 1.5rem;
-    border-radius: 50px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
 
-.button_logout:hover {
-    background-color: #d32f2f;
-}
 
 /* Header */
 .header {
@@ -121,6 +106,47 @@ body {
     box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
+
+
+
+
+/* styles/auth.css */
+.user-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-name {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #ea6666 0%, #a26e4b 100%);
+    color: white !important;
+    padding: 1.1rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.logout-btn:hover,
+.user-name:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
 /* Hero Section */
 .hero {
     min-height: 100vh;

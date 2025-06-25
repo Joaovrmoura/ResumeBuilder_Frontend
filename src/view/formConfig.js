@@ -101,7 +101,6 @@ class ResumeFormSteps {
     const form = document.getElementById('resumeForm');
     form?.addEventListener('submit', function (e) {
       e.preventDefault();
-      alert('Currículo gerado com sucesso! Em uma implementação real, aqui seria gerado o PDF ou visualização do currículo.');
     });
   }
 

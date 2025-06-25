@@ -9,11 +9,10 @@ class ModalLogin {
         this.submitBtn = this.form?.querySelector('.submit-btn');
         this.footer = this.form?.querySelector('.form-footer');
 
-        this.init();
+        this.init();    
         // Submissão do login
         this.form?.addEventListener('submit', (e) => {
             e.preventDefault();
-            console.log('enviado!');
 
             if (this.title.textContent === 'Entrar') {
                 this.loginForm();
@@ -39,30 +38,8 @@ class ModalLogin {
             const login = await auth.login(userData)
 
             if (login) {
-                // Fecha modal
                 this.close();
-
-                // Esconde botão de login
-                const loginBtn = document.querySelector('.login-btn');
-                if (loginBtn) loginBtn.style.display = 'none';
-
-                // Define userSpan corretamente
-                const userSpan = document.querySelector('.user-name');
-
-                if (userSpan) {
-                    userSpan.textContent = `Logado`;
-                    userSpan.style.display = 'inline-block';
-                    userSpan.style.padding = '0 10px';
-                    userSpan.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-                    userSpan.style.color = "white";
-                    userSpan.style.padding = "0.7rem 1.5rem";
-                    userSpan.style.borderRadius = "50px";
-                    userSpan.style.border = "none";
-                    userSpan.style.cursor = "pointer";
-                    userSpan.style.fontWeight = "600";
-                    userSpan.style.transition = "all 0.3s ease";
-                    userSpan.style.textDecoration = "none";
-                }
+                this.updateAuthUI(true);
             }
 
         } catch (error) {
@@ -71,8 +48,6 @@ class ModalLogin {
             loader.style.display = 'none';
         }
     }
-
-
 
     async registerForm() {
         const loader = document.getElementById('modal-loader');
@@ -91,33 +66,11 @@ class ModalLogin {
             const userData = { email, password };
             const auth = new AuthController();
             const register = await auth.register(userData);
-            console.log('cadastrou?', register);
 
             if (register) {
                 alert('Cadastrado com sucesso!');
-                // Fecha modal
                 this.close();
-                // Esconde botão de login
-                const loginBtn = document.querySelector('.login-btn');
-                if (loginBtn) loginBtn.style.display = 'none';
-
-                // Define userSpan corretamente
-                const userSpan = document.querySelector('.user-name');
-
-                if (userSpan) {
-                    userSpan.textContent = `Logado`;
-                    userSpan.style.display = 'inline-block';
-                    userSpan.style.padding = '0 10px';
-                    userSpan.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-                    userSpan.style.color = "white";
-                    userSpan.style.padding = "0.7rem 1.5rem";
-                    userSpan.style.borderRadius = "50px";
-                    userSpan.style.border = "none";
-                    userSpan.style.cursor = "pointer";
-                    userSpan.style.fontWeight = "600";
-                    userSpan.style.transition = "all 0.3s ease";
-                    userSpan.style.textDecoration = "none";
-                }
+                this.updateAuthUI(true);
             }
 
         } catch (error) {
@@ -127,6 +80,50 @@ class ModalLogin {
         }
     }
 
+    updateAuthUI(isLoggedIn) {
+        const loginBtn = document.querySelector('.login-btn');
+        const userContainer = document.querySelector('.user-container');
+        
+        if (isLoggedIn) {
+            if (loginBtn) loginBtn.style.display = 'none';
+            
+            if (!userContainer) {
+                const nav = document.querySelector('nav');
+                if (nav) {
+                    const newUserContainer = document.createElement('div');
+                    newUserContainer.className = 'user-container';
+                    nav.appendChild(newUserContainer);
+                }
+            }
+            
+            const container = document.querySelector('.user-container');
+            let userSpan = container.querySelector('.user-name');
+            let logoutBtn = container.querySelector('.logout-btn');
+            
+            if (!userSpan) {
+                userSpan = document.createElement('span');
+                userSpan.className = 'user-name';
+                userSpan.textContent = 'Logado';
+                container.appendChild(userSpan);
+            }
+            
+            if (!logoutBtn) {
+                logoutBtn = document.createElement('button');
+                logoutBtn.className = 'logout-btn';
+                logoutBtn.textContent = 'Logout';
+                container.appendChild(logoutBtn);
+                
+                logoutBtn.addEventListener('click', () => {
+                    sessionStorage.removeItem('user_id');
+                    sessionStorage.removeItem('user_email');
+                    this.updateAuthUI(false);
+                });
+            }
+        } else {
+            if (loginBtn) loginBtn.style.display = 'block';
+            if (userContainer) userContainer.remove();
+        }
+    }
 
     init() {
         if (!this.modal) return;
@@ -143,6 +140,7 @@ class ModalLogin {
 
         this.setupSmoothScroll();
         this.setupHeaderScrollEffect();
+
     }
 
     open() {
@@ -211,30 +209,10 @@ class ModalLogin {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new ModalLogin();
-
+    const modal = new ModalLogin();
+    
     const userId = sessionStorage.getItem('user_id');
-    const user_email = sessionStorage.getItem('user_email')
+    const user_email = sessionStorage.getItem('user_email');
 
-    const loginBtn = document.querySelector('.login-btn');
-    const userSpan = document.querySelector('.user-name');
-
-    if (userId && user_email) {
-        if (loginBtn) loginBtn.style.display = 'none';
-
-        if (userSpan) {
-            userSpan.style.display = 'flex'
-            userSpan.textContent = `Logado`;
-            userSpan.style.display = 'inline-block';
-            userSpan.style.padding = '0.7rem 1.5rem';
-            userSpan.style.background = "linear-gradient(135deg, #667eea 0%, #764ba2 100%)";
-            userSpan.style.color = "white";
-            userSpan.style.borderRadius = "50px";
-            userSpan.style.border = "none";
-            userSpan.style.cursor = "pointer";
-            userSpan.style.fontWeight = "600";
-            userSpan.style.transition = "all 0.3s ease";
-            userSpan.style.textDecoration = "none";
-        }
-    }
+    modal.updateAuthUI(!!userId && !!user_email);
 });
