@@ -766,6 +766,14 @@ body {
     justify-content: center;
     z-index: 10;
 }
+.modal-message{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+}
 
 .spinner-modal {
     border: 6px solid  #667eea;
