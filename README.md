@@ -1,51 +1,46 @@
-# Formatador de Currículo ATS
 
-Este é um aplicativo web que permite criar currículos otimizados para sistemas ATS (Applicant Tracking System), que são utilizados por empresas para filtrar candidatos em processos seletivos.
+Frontend Fast CV
 
-## Características
+Este é o frontend do projeto Fast CV, que consome a API RESTful para gerenciamento de currículos e usuários.
 
-- Formulário completo para inserção de dados pessoais e profissionais
-- Geração de currículo em formato ATS-friendly
-- Exportação para PDF com um clique
-- Design responsivo (funciona em dispositivos móveis e desktop)
-- Não requer conexão com internet após o carregamento inicial
+🔗 Como o frontend consome a API
+O frontend utiliza fetch API para realizar requisições HTTP para o backend hospedado em:
 
-## Como usar
+arduino
+https://sharehub-dev-v2.onrender.com
+Todas as requisições enviam cookies de autenticação (credentials: 'include') para manter a sessão autenticada via token JWT armazenado em cookie HttpOnly.
 
-1. Abra o arquivo `index.html` em qualquer navegador moderno
-2. Preencha o formulário com suas informações
-3. Clique em "Gerar Currículo" para visualizar o resultado
-4. Clique em "Baixar PDF" para salvar o currículo em formato PDF
+📚 Principais serviços e controllers
+AuthController
+Responsável pela autenticação do usuário:
 
-## Requisitos para currículos ATS
+login(formData): Envia um POST para /auth/login com email e senha, recebe o token via cookie e armazena dados básicos no sessionStorage.
+register(formData): Envia um POST para /auth/register para criar um novo usuário.
+Usa credentials: 'include' para enviar cookies e manter a sessão.
 
-- Formato simples e limpo
-- Fontes padrão (como Arial, Calibri ou Times New Roman)
-- Estrutura clara com títulos e subtítulos bem definidos
-- Palavras-chave relevantes para a vaga
-- Verbos de ação para descrever experiências
-- Evitar tabelas, imagens, gráficos ou elementos visuais complexos
-- Formato de arquivo compatível (PDF)
+ResumeService
+Gerencia as operações sobre currículos:
 
-## Arquivos do projeto
+findAll(): GET /api/resumes — lista todos os currículos.
+findOne(id): GET /api/resumes/:id — obtém um currículo específico.
+create(bodyData): POST /api/resumes — cria um novo currículo.
+Todas as chamadas enviam o cookie para autenticação.
 
-- `index.html`: Estrutura da página e formulário
-- `style.css`: Estilos e layout da aplicação
-- `script.js`: Funcionalidades de coleta de dados e geração de PDF
+User
+Serviço para operações relacionadas aos usuários:
+findOne(user_id): GET /api/users/:id — obtém informações de um usuário.
+findAll(): GET /api/users — lista todos os usuários.
 
-## Bibliotecas utilizadas
+⚙️ Configurações comuns nas requisições
+Headers: 'Content-Type': 'application/json'
+credentials: 'include' para enviar cookies HttpOnly com JWT
+Os dados são enviados e recebidos no formato JSON.
 
-- [html2pdf.js](https://github.com/eKoopmans/html2pdf.js): Para conversão do HTML para PDF
+🛠️ Tratamento de erros
+O frontend utiliza a função handleApiError (importada de ../utils/ErrorHandler.js) para tratar erros retornados pela API e lidar com mensagens de falha ou sucesso.
 
-## Personalização
+🌐 Link de Produção
+A aplicação frontend está disponível em produção neste link:
 
-Você pode personalizar o estilo do currículo editando o arquivo `style.css`. As classes relacionadas ao modelo de currículo começam com `resume-`.
-
-## Licença
-
-Este projeto é livre para uso pessoal e comercial.
-
----
-
-Desenvolvido por [Seu Nome]
-
+arduino
+https://fast-cv-phi.vercel.app/home.html#
