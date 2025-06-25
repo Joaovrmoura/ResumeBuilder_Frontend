@@ -15,7 +15,7 @@ class ResumeService {
             }
 
             const responseData = await response.json();
-            handleApiError(data)
+            handleApiError(responseData)
 
             if (responseData.success === true) {
                 return responseData.data;
@@ -69,7 +69,7 @@ class ResumeService {
 
             const data = await response.json();
             handleApiError(data);
-            
+
             if (data.success === true) {
                 console.log("Criado com sucesso", data.data);
                 return true
