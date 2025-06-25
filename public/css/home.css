@@ -761,24 +761,25 @@ body {
     height: 100%;
     background: white;
     display: flex;
+    flex-direction: column; /* NOVO */
     align-items: center;
     justify-content: center;
     z-index: 10;
 }
 
 .spinner-modal {
-    border: 6px solid #ccc;
-    border-top: 6px solid #272727;
+    border: 6px solid  #667eea;
+    border-top: 6px solid #764ba2;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     animation: spinModal 1s linear infinite;
 }
 
-@keyframes spinModal {
-    to {
-        transform: rotate(360deg);
-    }
+#modal-loader p {
+    margin-top: 15px; /* Espaçamento abaixo do spinner */
+    font-size: 16px;
+    color: #1c0138;
 }
 
 .indicator.active {
