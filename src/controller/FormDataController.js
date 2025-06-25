@@ -86,12 +86,19 @@ export default class FormDataCollector {
       });
     });
 
+    const languagesContainer = [];
+    document.querySelectorAll('#languages-container .addable-section').forEach(section => {
+      languagesContainer.push({
+        duration: section.querySelector('input[name="languages_name[]"]')?.value || '',
+        duration: section.querySelector('input[name="languages_level[]"]')?.value || ''
+      });
+    });
+
     // Idiomas
-    const languages = [];
-    const portugues = this.getValue('portugues');
-    const ingles = this.getValue('ingles');
-    if (portugues) languages.push({ language: 'Português', level: portugues });
-    if (ingles) languages.push({ language: 'Inglês', level: ingles });
+    // const languages = [];
+    // const languages_name = this.getValue('languages_name');
+    // if (portugues) languages.push({ name: 'Português', level: portugues });
+    // if (ingles) languages.push({ name: 'Inglês', level: ingles });
 
     // Objeto final
     return {
@@ -103,7 +110,7 @@ export default class FormDataCollector {
       technical_skills,
       professional_experience,
       additional_courses,
-      languages
+      languagesContainer
     };
   }
 }
@@ -114,6 +121,7 @@ document.getElementById('btnCreate').addEventListener('click', async () => {
     try {
         const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui
         await resumeDAO.create(jsonData);
+        
         alert('Currículo salvo com sucesso!');
     } catch (error) {
         console.error('Erro ao salvar currículo:', error);
@@ -121,12 +129,12 @@ document.getElementById('btnCreate').addEventListener('click', async () => {
     }
 });
 
-// Botão de visualizar JSON
-document.getElementById('visualizar-json').addEventListener('click', function () {
-    const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui também
-    alert(
-        'Dados do formulário (verifique o console para detalhes):\n' +
-        JSON.stringify(jsonData, null, 2)
-    );
-    console.log(jsonData);
-});
+// // Botão de visualizar JSON
+// document.getElementById('visualizar-json').addEventListener('click', function () {
+//     const jsonData = FormDataCollector.collectFormData(); // coleta atualizada aqui também
+//     alert(
+//         'Dados do formulário (verifique o console para detalhes):\n' +
+//         JSON.stringify(jsonData, null, 2)
+//     );
+//     console.log(jsonData);
+// });

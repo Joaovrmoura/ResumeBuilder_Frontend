@@ -1,4 +1,4 @@
-function verificarAutenticacao() {
+function verifyAuth() {
   const userId = sessionStorage.getItem('user_id');
   const user_email = sessionStorage.getItem('user_email')
 
@@ -6,8 +6,6 @@ function verificarAutenticacao() {
     window.location.href = 'home.html';
   }
 }
-
-verificarAutenticacao();
 
 class ResumeFormSteps {
   constructor() {
@@ -64,6 +62,7 @@ class ResumeFormSteps {
     this.setupAddButton('add-educacao', 'educacao-container', ['input', 'textarea']);
     this.setupAddButton('add-experiencia', 'experiencias-container', ['input', 'textarea']);
     this.setupAddButton('add-curso-extra', 'cursos-extras-container', ['input']);
+    this.setupAddButton('add-language-extra', 'languages-container', ['input'])
   }
 
   setupAddButton(buttonId, containerId, inputSelectors) {
@@ -121,5 +120,6 @@ class ResumeFormSteps {
 
 // Inicialização automática
 document.addEventListener('DOMContentLoaded', () => {
+  verifyAuth();
   new ResumeFormSteps();
 });

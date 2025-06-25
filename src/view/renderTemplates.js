@@ -1,8 +1,7 @@
-import transformarResume from './transformDATA.js';
-import TemplateEnum from '../view/Templates.js'; // renomeie se necessário
+import transformarResume from '../model/ResumeDTO.js';
+import TemplateEnum from './Templates.js'; // renomeie se necessário
 
 export default class Templates {
-
 
   transformResumeData(originalData) {
     return transformarResume(originalData);

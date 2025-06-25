@@ -1,13 +1,14 @@
+// neeed divide responsability
 import resumeDAO from "../model/resumeDAO.js";
 import User from '../model/userDAO.js';
-import ResumeController from "../controller/ResumeController.js";
+import TemplateController from "../controller/TemplateController.js";
 import generatePDF from './generatePDF.js';
 
-function verificarAutenticacao() {
+function verifyAuth() {
     const userId = sessionStorage.getItem('user_id');
     const user_email = sessionStorage.getItem('user_email');
-    console.log(userId, user_email); 
-    
+    console.log(userId, user_email);
+
     if (!userId || !user_email) {
         window.location.href = 'home.html';
     }
@@ -18,59 +19,59 @@ export default class CurriculoUI {
         this.initCardAnimations();
     }
 
-   showSection(sectionId, event) {
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.style.display = 'none'; // Oculta todos
-        section.classList.remove('visualizacao-curriculo'); // Remove estilo especial
-    });
+    showSection(sectionId, event) {
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.style.display = 'none'; // Oculta todos
+            section.classList.remove('visualizacao-curriculo'); // Remove estilo especial
+        });
 
-    const targetSection = document.getElementById(sectionId);
-    targetSection.style.display = 'block';
+        const targetSection = document.getElementById(sectionId);
+        targetSection.style.display = 'block';
 
-    if (sectionId === 'unico') {
-        targetSection.classList.add('visualizacao-curriculo');
-    }
-
-    document.querySelectorAll('.nav-tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-
-    if (event && event.target) {
-        event.target.classList.add('active');
-    }
-
-    const pdfButton = document.getElementById('generate-pdf');
-    if (pdfButton) pdfButton.style.display = 'none'; // Esconde botão PDF ao sair
-}
-
-
-
-   async showSingleCurriculo(id) {
-    if (!id) {
-        console.error("ID do currículo inválido:", id);
-        return;
-    }
-
-    this.showSection('unico'); // Agora ativa a exibição do currículo
-    document.querySelector('.nav-tab:nth-child(2)')?.classList.add('active');
-
-    const resumeElement = document.getElementById('resume');
-    const pdfButton = document.getElementById('generate-pdf');
-    const controller = new ResumeController();
-
-    try {
-        const htmlRenderizado = await controller.getOne(id);
-        resumeElement.innerHTML = htmlRenderizado;
-
-        if (pdfButton) {
-            pdfButton.style.display = 'block';
-            pdfButton.onclick = () => generatePDF();
+        if (sectionId === 'unico') {
+            targetSection.classList.add('visualizacao-curriculo');
         }
-    } catch (err) {
-        resumeElement.innerHTML = "<p>Erro ao carregar currículo.</p>";
-        console.error("Erro ao renderizar currículo:", err);
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        if (event && event.target) {
+            event.target.classList.add('active');
+        }
+
+        const pdfButton = document.getElementById('generate-pdf');
+        if (pdfButton) pdfButton.style.display = 'none'; // Esconde botão PDF ao sair
     }
-}
+
+
+
+    async showSingleCurriculo(id) {
+        if (!id) {
+            console.error("ID do currículo inválido:", id);
+            return;
+        }
+
+        this.showSection('unico'); // Agora ativa a exibição do currículo
+        document.querySelector('.nav-tab:nth-child(2)')?.classList.add('active');
+
+        const resumeElement = document.getElementById('resume');
+        const pdfButton = document.getElementById('generate-pdf');
+        const controller = new TemplateController();
+
+        try {
+            const htmlRenderizado = await controller.getOne(id);
+            resumeElement.innerHTML = htmlRenderizado;
+
+            if (pdfButton) {
+                pdfButton.style.display = 'block';
+                pdfButton.onclick = () => generatePDF();
+            }
+        } catch (err) {
+            resumeElement.innerHTML = "<p>Erro ao carregar currículo.</p>";
+            console.error("Erro ao renderizar currículo:", err);
+        }
+    }
 
 
 
@@ -156,15 +157,13 @@ async function getAll() {
 
 
 
-
 document.addEventListener('DOMContentLoaded', async () => {
-    verificarAutenticacao();
+    verifyAuth();
     const ui = new CurriculoUI();
     const numberOfresumes = document.getElementById('numberOfresumes');
     const user_id = sessionStorage.getItem('user_id');
     const loader = document.getElementById('loader');
     loader.style.display = 'flex'; // Mostra o loader
-
 
     try {
         const user = new User();
@@ -175,10 +174,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (result.length >= 0) {
             ui.renderCurriculos(result);
         }
+
     } catch (err) {
         console.error("Erro ao carregar currículos:", err);
     } finally {
-    loader.style.display = 'none'; // Esconde o loader
+        loader.style.display = 'none'; // Esconde o loader
     }
 
     const searchInput = document.getElementById('searchInput');

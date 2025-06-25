@@ -11,6 +11,27 @@ body {
     overflow-x: hidden;
 }
 
+.nav-btn{
+    display: flex;
+    gap: 15px;
+}
+.button_logout {
+    display: none;
+    background: linear-gradient(135deg, #ea6666 0%, #a24e4b 100%);
+    color: white !important;
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.button_logout:hover {
+    background-color: #d32f2f;
+}
+
 /* Header */
 .header {
     position: fixed;

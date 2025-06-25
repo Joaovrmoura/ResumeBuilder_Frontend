@@ -1,4 +1,3 @@
-
 class Carousel {
     constructor() {
         this.currentSlide = 0;

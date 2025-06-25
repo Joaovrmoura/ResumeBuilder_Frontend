@@ -2,7 +2,7 @@ class ResumeService {
 
     async findOne(id) {
         try {
-            const response = await fetch(`https://sharehub-dev-v2.onrender.com/api/resumes/${id}`, {
+            const response = await fetch(`http://localhost:3060/api/resumes/${id}`, {
                 method: "GET",
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -30,7 +30,7 @@ class ResumeService {
 
     async findAll() {
         try {
-            const response = await fetch(`https://sharehub-dev-v2.onrender.com/api/resumes`, {
+            const response = await fetch(`http://localhost:3060/api/resumes`, {
                 method: "GET",
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' }
@@ -56,7 +56,7 @@ class ResumeService {
         try {
             console.log("DADOS DO BODY", bodyData);
 
-            const response = await fetch("https://sharehub-dev-v2.onrender.com/api/resumes/", {
+            const response = await fetch("http://localhost:3060/api/resumes/", {
                 method: "POST",
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },

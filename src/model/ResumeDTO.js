@@ -7,7 +7,6 @@ function transformarResume(original) {
     });
   }
 
-
   return {
 
     personal_data: {

@@ -386,63 +386,103 @@
           </div>
         </div>
 
-        <!-- Etapa 7: Cursos e Idiomas -->
+
+
+          <!-- Etapa 4: Conhecimentos Técnicos -->
         <div class="step-section" id="step7" data-step="7">
-
           <div class="form-section">
-            <h2><i class="fas fa-language"></i> Idiomas</h2>
-            <div class="two-columns">
+            <div class="step-indicator">4</div>
+            <h2><i class="fas fa-laptop-code"></i> Conhecimentos Técnicos</h2>
 
+            <div id="languages-container">
+              <div class="addable-section">
+                <button type="button" class="remove-item-btn">
+                  <i class="fas fa-times"></i>
+                </button>
+        
+              <div Class="two-columns">
+                <div class="form-group">
+                  <label for="languages_name">Nome ex: Português</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-flag"></i>
+                    <input type="text" id="languages_name" name="languages_name[]" placeholder="Ex: Nativo">
+                  </div>
+                </div>
 
-              <div class="form-group">
-                <label for="portugues">Português</label>
-                <div class="input-with-icon">
-                  <i class="fas fa-flag"></i>
-                  <input type="text" id="portugues" name="portugues" placeholder="Ex: Nativo">
+                <div class="form-group">
+                  <label for="languages_level">Level ex: básico</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-flag"></i>
+                    <input type="text" id="languages_level" name="languages_level[]" placeholder="Ex: Nativo">
+                  </div>
                 </div>
               </div>
-
-
-              <div class="form-group">
-                <label for="ingles">Inglês</label>
-                <div class="input-with-icon">
-                  <i class="fas fa-flag-usa"></i>
-                  <input type="text" id="ingles" name="ingles" placeholder="Ex: Intermediário Técnico">
-                </div>
-              </div>
-
+            
             </div>
-
-
-            <button type="button" class="add-more-btn" id="add-curso">
-              <i class="fas fa-plus"></i> Adicionar Curso
-            </button>
           </div>
+
+          <button type="button" class="add-more-btn" id="add-language-extra">
+            <i class="fas fa-plus"></i> Adicionar idioma
+          </button>
 
           <div class="step-navigation">
             <button type="button" class="nav-btn prev" data-prev="6">
               <i class="fas fa-arrow-left"></i> Anterior
             </button>
-
             <button id="btnCreate" class="nav-btn submit-btn">Salvar currículo </button>
           </div>
+
         </div>
+
+        </div>
+
+
+        <!-- Etapa 7: Cursos e Idiomas -->
+        <!-- <div class="step-section" id="step7" data-step="7">
+
+          <div class="form-section">
+            <h2><i class="fas fa-language"></i> Idiomas</h2>
+            <div class="addable-section">
+
+            <div id="languages-container" class="two-columns">
+              <div class="form-group">
+                <label for="languages_name">Português</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-flag"></i>
+                  <input type="text" id="languages_name" name="languages_name[]" placeholder="Ex: Nativo">
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" class="add-more-btn" id="add-curso">
+              <i class="fas fa-plus"></i> Adicionar idioma
+            </button>
+
+          <div class="step-navigation">
+            <button type="button" class="nav-btn prev" data-prev="6">
+              <i class="fas fa-arrow-left"></i> Anterior
+            </button>
+            <button id="btnCreate" class="nav-btn submit-btn">Salvar currículo </button>
+          </div>
+
+          </div>
+        </div> -->
       </form>
 
     </div>
 
-    <button type="button" id="visualizar-json">Dashboard</button>
+    <a type="button" href="./dashboard.html" id="visualizar-json">Dashboard</a>
 
 
     <!-- aqui fecha o container geral -->
   </div>
-    <a href="./dashboard.html" class="preview-toggle">
+    <!-- <a href="./dashboard.html" class="preview-toggle">
        <i class="fas fa-eye"></i>
-    </a>
+    </a> -->
 
   <!-- <script type="module" src="/main.js"></script> -->
-  <script type="module" src="./src/utils/FormDataCollector.js"> </script>
-  <script src="./src/utils/formConfig.js"></script>
+  <script type="module" src="./src/controller/FormDataController.js"> </script>
+  <script src="./src/view/formConfig.js"></script>
 </body>
 
 </html>

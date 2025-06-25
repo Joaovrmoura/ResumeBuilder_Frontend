@@ -34,9 +34,9 @@ function generatePDF() {
                 i--;
                 totalPages--;
             }
-            window.open(_pdf.output("bloburl"));
+            // window.open(_pdf.output("bloburl"));
             // função para salvar!
-            //  _pdf.save("curriculo.pdf");
+             _pdf.save("curriculo.pdf");
         }
     });
 }

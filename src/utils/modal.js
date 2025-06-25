@@ -73,6 +73,7 @@ class ModalLogin {
     }
 
 
+
     async registerForm() {
         const loader = document.getElementById('modal-loader');
         loader.style.display = 'flex';
@@ -222,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (loginBtn) loginBtn.style.display = 'none';
 
         if (userSpan) {
+            userSpan.style.display = 'flex'
             userSpan.textContent = `Logado`;
             userSpan.style.display = 'inline-block';
             userSpan.style.padding = '0.7rem 1.5rem';

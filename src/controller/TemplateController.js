@@ -1,7 +1,7 @@
 import ResumeService from '../model/resumeDAO.js';
-import Templates from '../utils/templateHTML.js';
+import Templates from '../view/renderTemplates.js';
 
-class ResumeController {
+class TemplateController {
     #templatesHTML;
 
     constructor() {
@@ -34,10 +34,6 @@ class ResumeController {
             console.error("Erro ao gerar currículos:", error);
         }
     }
-
-    async createResume(data) {
-
-    }
 }
 
-export default ResumeController;
+export default TemplateController;
