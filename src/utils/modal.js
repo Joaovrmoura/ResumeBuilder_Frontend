@@ -83,6 +83,7 @@ class ModalLogin {
     updateAuthUI(isLoggedIn) {
         const loginBtn = document.querySelector('.login-btn');
         const userContainer = document.querySelector('.user-container');
+        console.log("FUI LOGADO", loginBtn);
         
         if (isLoggedIn) {
             if (loginBtn) loginBtn.style.display = 'none';
