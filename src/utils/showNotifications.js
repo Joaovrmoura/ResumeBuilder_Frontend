@@ -20,5 +20,5 @@ export function showNotification(message, type = 'error') {
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
-    }, 4000);
+    }, 10000);
 }
