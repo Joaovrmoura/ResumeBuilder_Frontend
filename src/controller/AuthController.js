@@ -4,7 +4,7 @@ class AuthController {
 
     async login(formData) {
         try {
-            const response = await fetch('https://sharehub-dev-v2.onrender.com/auth/login', {
+            const response = await fetch('https://resumebuilder-pnlh.onrender.com/auth/login', {
                 method: 'POST',
                 credentials: 'include', 
                 headers: { 'Content-Type': 'application/json' },
@@ -33,7 +33,7 @@ class AuthController {
     
     async register(formData) {
         try {
-            const response = await fetch('https://sharehub-dev-v2.onrender.com/auth/register', {
+            const response = await fetch('https://resumebuilder-pnlh.onrender.com/auth/register', {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
