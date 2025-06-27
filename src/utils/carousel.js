@@ -80,7 +80,6 @@ function verificarAutenticacaoComModal() {
     
    const userId = sessionStorage.getItem('user_id');
    const user_email = sessionStorage.getItem('user_email')
-   console.log('clicado!');
    
     if (!user_email || !userId) {
         const modal = document.getElementById('authRequiredModal');
